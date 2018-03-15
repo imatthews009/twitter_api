@@ -3,7 +3,7 @@ require "unirest"
 
 class TweetsController < ApplicationController
   def index
-
+    # Index encodes the consumer and secret key to be passed to the twitter api in order to obtain a token. 
     consumer_key = ENV["consumer_key"]
     consumer_secret = ENV["consumer_secret"]
     encode_secret = Base64.encode64("#{consumer_key}:#{consumer_secret}").gsub("\n", "")
@@ -15,7 +15,7 @@ class TweetsController < ApplicationController
                              }, 
                             parameters:{grant_type: 'client_credentials'}
                             
-  
+    # Once we are authroized was the token and make a get request for 5 conan tweets
     response2 = Unirest.get twitter_api, 
                             headers:{Authorization: "Bearer #{response.body["access_token"]}"}
   
